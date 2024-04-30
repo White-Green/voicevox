@@ -26,7 +26,7 @@ async function getSelectedStatus(page: Page): Promise<SelectedStatus> {
     let active: number | undefined;
     const selected: number[] = [];
     for (let i = 0; i < audioCells.length; i++) {
-      const audioCell = audioCells[i];
+      const audioCell = audioCells[i]!;
       if (audioCell.classList.contains("active")) {
         active = i + 1;
       }

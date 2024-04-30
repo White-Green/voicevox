@@ -50,12 +50,12 @@ function findMora(
 ): Mora | undefined {
   let candidate: Mora | undefined;
   for (let i = 0; i < accentPhrases.length; i++) {
-    for (let j = 0; j < accentPhrases[i].moras.length; j++) {
-      if (accentPhrases[i].moras[j].text === text) {
+    for (let j = 0; j < accentPhrases[i]!.moras.length; j++) {
+      if (accentPhrases[i]!.moras[j]!.text === text) {
         if (candidate != undefined) {
           throw new Error(`AccentPhraseに${text}が複数見つかりました`);
         }
-        candidate = accentPhrases[i].moras[j];
+        candidate = accentPhrases[i]!.moras[j];
       }
     }
   }
@@ -179,7 +179,7 @@ describe("TuningTranscription", () => {
     // モーラ数などは変わっていない
     expect(result.length).toEqual(after.length);
     for (let i = 0; i < result.length; i++) {
-      expect(result[i].moras.length).toEqual(after[i].moras.length);
+      expect(result[i]!.moras.length).toEqual(after[i]!.moras.length);
     }
 
     // 転写されている
@@ -208,7 +208,7 @@ describe("TuningTranscription", () => {
     // モーラ数などは変わっていない
     expect(result.length).toEqual(after.length);
     for (let i = 0; i < result.length; i++) {
-      expect(result[i].moras.length).toEqual(after[i].moras.length);
+      expect(result[i]!.moras.length).toEqual(after[i]!.moras.length);
     }
 
     // 転写されている
@@ -370,7 +370,7 @@ describe("filterCharacterInfosByStyleType", () => {
       expect(filtered.length).toBe(2);
       filtered.forEach((c) => {
         // styleTypeが指定したものになっている
-        expect(c.metas.styles[0].styleType).toBe(styleType);
+        expect(c.metas.styles[0]!.styleType).toBe(styleType);
         // stylesの数が正しい
         expect(c.metas.styles.length).toBe(1);
       });
@@ -383,16 +383,16 @@ describe("filterCharacterInfosByStyleType", () => {
       "singerLike",
     );
     expect(filtered.length).toBe(3);
-    expect(filtered[0].metas.styles.length).toBe(1);
-    expect(filtered[1].metas.styles.length).toBe(1);
-    expect(filtered[2].metas.styles.length).toBe(2);
+    expect(filtered[0]!.metas.styles.length).toBe(1);
+    expect(filtered[1]!.metas.styles.length).toBe(1);
+    expect(filtered[2]!.metas.styles.length).toBe(2);
   });
 
   test(`talkを指定するとsingerLike以外のキャラクターが取得できる`, () => {
     const filtered = filterCharacterInfosByStyleType(characterInfos, "talk");
     expect(filtered.length).toBe(3);
-    expect(filtered[0].metas.styles.length).toBe(1);
-    expect(filtered[1].metas.styles.length).toBe(1);
-    expect(filtered[2].metas.styles.length).toBe(1);
+    expect(filtered[0]!.metas.styles.length).toBe(1);
+    expect(filtered[1]!.metas.styles.length).toBe(1);
+    expect(filtered[2]!.metas.styles.length).toBe(1);
   });
 });

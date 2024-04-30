@@ -31,8 +31,8 @@ async function getSpeakerImages(): Promise<
     const icons = images.filter((image) => image.startsWith("icon"));
     icons.sort(
       (a, b) =>
-        parseInt(a.split(".")[0].split("_")[1]) -
-        parseInt(b.split(".")[0].split("_")[1]),
+        parseInt(a.split(".")[0]!.split("_")[1]!) -
+        parseInt(b.split(".")[0]!.split("_")[1]!),
     );
     speakerImages = await Promise.all(
       icons.map(async (iconPath) => {
@@ -101,7 +101,7 @@ test.beforeEach(async ({ page }) => {
     if (speakerIndex === -1) {
       throw new Error(`speaker_uuid=${speakerUuid} is not found`);
     }
-    const image = speakerImages[speakerIndex % speakerImages.length];
+    const image = speakerImages[speakerIndex % speakerImages.length]!;
     json.portrait = image.portrait;
     for (const style of json.styleInfos) {
       style.icon = image.icon;

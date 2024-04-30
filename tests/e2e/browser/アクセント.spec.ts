@@ -11,7 +11,7 @@ test("アクセント分割したらアクセント区間が増える", async ({
   await page.locator(".audio-cell input").first().press("Enter");
   await page.waitForTimeout(500);
   expect(await page.locator(".mora-table").count()).toBe(1);
-  await (await page.locator(".splitter-cell").all())[1].click();
+  await (await page.locator(".splitter-cell").all())[1]!.click();
   await page.waitForTimeout(500);
   expect(await page.locator(".mora-table").count()).toBe(2);
 });

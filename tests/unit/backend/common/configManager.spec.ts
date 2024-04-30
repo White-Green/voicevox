@@ -61,7 +61,7 @@ it("バージョンが保存される", async () => {
   await configManager.initialize();
   await configManager.ensureSaved();
   expect(saveSpy).toHaveBeenCalled();
-  const savedData = saveSpy.mock.calls[0][0];
+  const savedData = saveSpy.mock.calls[0]![0]!;
   expect(savedData.__internal__.migrations.version).toBe("999.999.999");
 });
 
